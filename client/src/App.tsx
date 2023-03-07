@@ -26,14 +26,18 @@ const App: React.FC = () => {
   };
 
   const dragEndHnadler = (result: DropResult) => {
-    console.log(result);
-    const { source, destination } = result;
-    if (!destination) return;
+    const { destination, source } = result;
+
+    if (!destination) {
+      return;
+    }
+
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
-    )
+    ) {
       return;
+    }
 
     let add;
     let active = allTodos;
@@ -44,7 +48,7 @@ const App: React.FC = () => {
       active.splice(source.index, 1);
     } else {
       add = complete[source.index];
-      complete.splice(source.index);
+      complete.splice(source.index, 1);
     }
 
     if (destination.droppableId === "TodosList") {
